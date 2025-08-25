@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My To-Do List</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .card {
+      border-radius: 15px;
+      box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
+    }
+    .completed {
+      text-decoration: line-through;
+      color: gray;
+    }
+    .btn-circle {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      padding: 0;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card p-4">
+          <h2 class="text-center text-primary mb-4">📝 My To-Do List</h2>
+
+          <!-- Add Task Form -->
+          <form action="/add" method="post" class="d-flex mb-3">
+            <input type="text" name="task" class="form-control me-2" placeholder="Enter new task..." required>
+            <button type="submit" class="btn btn-success">Add</button>
+          </form>
+
+          <!-- Task List -->
+          <ul class="list-group">
+            {% for task in tasks %}
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span class="{{ 'completed' if task.completed }}">{{ task.content }}</span>
+                <div>
+                  <a href="/complete/{{ loop.index0 }}" class="btn btn-sm btn-primary btn-circle me-1">✔</a>
+                  <a href="/delete/{{ loop.index0 }}" class="btn btn-sm btn-danger btn-circle">✖</a>
+                </div>
+              </li>
+            {% else %}
+              <li class="list-group-item text-center text-muted">No tasks yet!</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
