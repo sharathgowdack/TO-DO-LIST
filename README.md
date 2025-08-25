@@ -46,8 +46,4 @@ static/         # CSS styles
 tasks.db        # Database
 requirements.txt
 
-About
-
-This project is just a simple practice app.
-I plan to improve the design and maybe add features like categories, due dates, etc.
 
